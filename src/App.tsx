@@ -84,7 +84,7 @@ const DEFAULT_PENGATURAN: PengaturanKoperasi = {
   katalog_hero_judul: 'Belanja kebutuhan harian lebih hemat dengan harga khusus anggota koperasi.',
   katalog_hero_subjudul:
     'Setiap transaksi otomatis tercatat dalam perhitungan Sisa Hasil Usaha (SHU) tahunan Anda dan mendukung produk UMKM anggota.',
-  katalog_hero_foto: '/src/assets/images/hero_koperasi_banner_1794528004578.jpg',
+  katalog_hero_foto: '/images/hero_koperasi_banner_1794528004578.jpg',
   katalog_urutan_default: 'TERBARU',
   katalog_tampil_badge_diskon: true,
   katalog_kolom_desktop: 4,

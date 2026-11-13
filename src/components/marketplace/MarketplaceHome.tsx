@@ -174,7 +174,7 @@ export const MarketplaceHome: React.FC<MarketplaceHomeProps> = ({
             <ProductImage
               src={
                 pengaturan.katalog_hero_foto ||
-                '/src/assets/images/hero_koperasi_banner_1794528004578.jpg'
+                '/images/hero_koperasi_banner_1794528004578.jpg'
               }
               alt={pengaturan.nama_koperasi}
               className="h-full w-full object-cover"

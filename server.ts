@@ -2,8 +2,8 @@ import crypto from 'crypto';
 import dotenv from 'dotenv';
 import express, { NextFunction, Request, Response } from 'express';
 import fs from 'fs';
+import http from 'http';
 import path from 'path';
-import { createServer as createViteServer } from 'vite';
 import type {
   AdminStatsResponse,
   AnggotaRecord,
@@ -28,7 +28,7 @@ import {
 
 dotenv.config();
 
-const PORT = 3000;
+const PORT = Number(process.env.PORT) || 3000;
 const SESSION_SECRET = process.env.SESSION_SECRET || 'KOPERASI_DIGITAL_PRO_WITNO_HMAC_2026';
 
 interface SessionPayload {
@@ -1253,7 +1253,7 @@ async function startServer() {
         stok: Math.max(0, Math.floor(Number(body.stok || 0))),
         stok_min: Math.max(0, Math.floor(Number(body.stok_min || 5))),
         satuan: String(body.satuan || 'Pcs'),
-        foto_url: String(body.foto_url || '/src/assets/images/prod_beras_organik_1794528005705.jpg'),
+        foto_url: String(body.foto_url || '/images/prod_beras_organik_1794528005705.jpg'),
         rating: 5.0,
         terjual: 0,
         unggulan: Boolean(body.unggulan),
@@ -1623,22 +1623,81 @@ async function startServer() {
     res.json(safeBackup);
   });
 
+  app.get('/api/health', (_req, res) => {
+    res.json({ status: 'ok', app: 'KOPERASI DIGITAL PRO', env: process.env.NODE_ENV || 'development' });
+  });
+
+  app.use('/api', (_req, res) => {
+    res.status(404).json({ error: 'Endpoint API tidak ditemukan.' });
+  });
+
+  const httpServer = http.createServer(app);
+
   // ======================== VITE MIDDLEWARE / STATIC ========================
-  if (process.env.NODE_ENV !== 'production') {
+  const isProduction = process.env.NODE_ENV === 'production' || import.meta.url.endsWith('.mjs');
+  if (!isProduction) {
+    const { createServer: createViteServer } = await import('vite');
     const vite = await createViteServer({
-      server: { middlewareMode: true },
+      server: {
+        middlewareMode: true,
+        hmr: process.env.DISABLE_HMR === 'true' ? false : { server: httpServer },
+      },
       appType: 'spa',
     });
+    if (vite.config.server.hmr === false) {
+      app.get('/@vite/client', (_req, res) => {
+        res.type('application/javascript').send(`
+const sheetsMap = new Map();
+export class ErrorOverlay {}
+export function updateStyle(id, content) {
+  let style = sheetsMap.get(id);
+  if (!style) {
+    style = document.createElement('style');
+    style.setAttribute('type', 'text/css');
+    style.setAttribute('data-vite-dev-id', id);
+    style.textContent = content;
+    document.head.appendChild(style);
+    sheetsMap.set(id, style);
+  } else {
+    style.textContent = content;
+  }
+}
+export function removeStyle(id) {
+  const style = sheetsMap.get(id);
+  if (style) {
+    style.remove();
+    sheetsMap.delete(id);
+  }
+}
+export function injectQuery(url) {
+  return url;
+}
+export function createHotContext() {
+  return {
+    accept() {},
+    acceptExports() {},
+    dispose() {},
+    prune() {},
+    invalidate() {},
+    on() {},
+    off() {},
+    send() {},
+    data: {},
+  };
+}
+`);
+      });
+    }
     app.use(vite.middlewares);
   } else {
     const distPath = path.resolve(process.cwd(), 'dist');
     app.use(express.static(distPath));
-    app.get('*', (_req, res) => {
+    app.get(/^\/(?!api\/).*/, (_req, res) => {
       res.sendFile(path.join(distPath, 'index.html'));
     });
   }
 
-  app.listen(PORT, '0.0.0.0', () => {
+  httpServer.listen(PORT, '0.0.0.0', () => {
     console.log(`KOPERASI DIGITAL PRO server running on http://0.0.0.0:${PORT}`);
   });
 }

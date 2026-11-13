@@ -265,7 +265,7 @@ export function createInitialDatabase(): KoperasiDatabase {
       stok: 64,
       stok_min: 10,
       satuan: 'Pouch 5 Kg',
-      foto_url: '/src/assets/images/prod_beras_organik_1794528005705.jpg',
+      foto_url: '/images/prod_beras_organik_1794528005705.jpg',
       rating: 4.9,
       terjual: 218,
       unggulan: true,
@@ -287,7 +287,7 @@ export function createInitialDatabase(): KoperasiDatabase {
       stok: 42,
       stok_min: 8,
       satuan: 'Pouch 250g',
-      foto_url: '/src/assets/images/prod_kopi_arabika_1794528004723.jpg',
+      foto_url: '/images/prod_kopi_arabika_1794528004723.jpg',
       rating: 4.9,
       terjual: 156,
       unggulan: true,
@@ -309,7 +309,7 @@ export function createInitialDatabase(): KoperasiDatabase {
       stok: 29,
       stok_min: 5,
       satuan: 'Botol Kaca',
-      foto_url: '/src/assets/images/prod_madu_hutan_1794528004581.jpg',
+      foto_url: '/images/prod_madu_hutan_1794528004581.jpg',
       rating: 5.0,
       terjual: 134,
       unggulan: true,
@@ -331,7 +331,7 @@ export function createInitialDatabase(): KoperasiDatabase {
       stok: 38,
       stok_min: 6,
       satuan: 'Botol 250 ml',
-      foto_url: '/src/assets/images/prod_minyak_kelapa_1794528007328.jpg',
+      foto_url: '/images/prod_minyak_kelapa_1794528007328.jpg',
       rating: 4.8,
       terjual: 97,
       unggulan: false,
@@ -353,7 +353,7 @@ export function createInitialDatabase(): KoperasiDatabase {
       stok: 24,
       stok_min: 5,
       satuan: 'Pcs',
-      foto_url: '/src/assets/images/prod_batik_koperasi_1794528007074.jpg',
+      foto_url: '/images/prod_batik_koperasi_1794528007074.jpg',
       rating: 4.9,
       terjual: 88,
       unggulan: true,
@@ -375,7 +375,7 @@ export function createInitialDatabase(): KoperasiDatabase {
       stok: 53,
       stok_min: 10,
       satuan: 'Kemasan 500g',
-      foto_url: '/src/assets/images/prod_gula_aren_1794528006522.jpg',
+      foto_url: '/images/prod_gula_aren_1794528006522.jpg',
       rating: 4.7,
       terjual: 142,
       unggulan: false,
@@ -397,7 +397,7 @@ export function createInitialDatabase(): KoperasiDatabase {
       stok: 18,
       stok_min: 4,
       satuan: 'Set 12 Pcs',
-      foto_url: '/src/assets/images/prod_set_piring_keramik_1794532836936.jpg',
+      foto_url: '/images/prod_set_piring_keramik_1794532836936.jpg',
       rating: 4.9,
       terjual: 64,
       unggulan: true,
@@ -419,7 +419,7 @@ export function createInitialDatabase(): KoperasiDatabase {
       stok: 25,
       stok_min: 5,
       satuan: 'Set 5 Pcs',
-      foto_url: '/src/assets/images/prod_set_gelas_kaca_1794532836365.jpg',
+      foto_url: '/images/prod_set_gelas_kaca_1794532836365.jpg',
       rating: 4.8,
       terjual: 79,
       unggulan: false,
@@ -441,7 +441,7 @@ export function createInitialDatabase(): KoperasiDatabase {
       stok: 14,
       stok_min: 3,
       satuan: 'Unit',
-      foto_url: '/src/assets/images/prod_rice_cooker_1794532837700.jpg',
+      foto_url: '/images/prod_rice_cooker_1794532837700.jpg',
       rating: 5.0,
       terjual: 52,
       unggulan: true,
@@ -463,7 +463,7 @@ export function createInitialDatabase(): KoperasiDatabase {
       stok: 16,
       stok_min: 3,
       satuan: 'Unit',
-      foto_url: '/src/assets/images/prod_blender_kaca_1794532836548.jpg',
+      foto_url: '/images/prod_blender_kaca_1794532836548.jpg',
       rating: 4.9,
       terjual: 47,
       unggulan: true,
@@ -959,7 +959,7 @@ export function createInitialDatabase(): KoperasiDatabase {
     katalog_hero_judul: 'Belanja kebutuhan harian lebih hemat dengan harga khusus anggota koperasi.',
     katalog_hero_subjudul:
       'Setiap transaksi otomatis tercatat dalam perhitungan Sisa Hasil Usaha (SHU) tahunan Anda dan mendukung produk UMKM anggota.',
-    katalog_hero_foto: '/src/assets/images/hero_koperasi_banner_1794528004578.jpg',
+    katalog_hero_foto: '/images/hero_koperasi_banner_1794528004578.jpg',
     katalog_urutan_default: 'TERBARU',
     katalog_tampil_badge_diskon: true,
     katalog_kolom_desktop: 4,
@@ -1020,6 +1020,16 @@ export function loadDatabase(): KoperasiDatabase {
       parsed.PRODUK.push(prod);
       changed = true;
     }
+  }
+  for (const prod of parsed.PRODUK) {
+    if (prod.foto_url && prod.foto_url.startsWith('/src/assets/images/')) {
+      prod.foto_url = prod.foto_url.replace('/src/assets/images/', '/images/');
+      changed = true;
+    }
+  }
+  if (parsed.PENGATURAN?.katalog_hero_foto?.startsWith('/src/assets/images/')) {
+    parsed.PENGATURAN.katalog_hero_foto = parsed.PENGATURAN.katalog_hero_foto.replace('/src/assets/images/', '/images/');
+    changed = true;
   }
   const mergedPengaturan = { ...seed.PENGATURAN, ...(parsed.PENGATURAN || {}) };
   if (JSON.stringify(mergedPengaturan) !== JSON.stringify(parsed.PENGATURAN)) {

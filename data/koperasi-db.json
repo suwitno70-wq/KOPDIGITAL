@@ -12,7 +12,7 @@
       "id_anggota": null,
       "status": "AKTIF",
       "created_at": "2025-01-01T08:00:00.000Z",
-      "last_login": "2026-11-13T02:25:52.231Z"
+      "last_login": "2026-11-13T05:57:49.425Z"
     },
     {
       "id_user": "USR-KASIR",
@@ -877,6 +877,17 @@
     }
   ],
   "LOG_AKTIVITAS": [
+    {
+      "id_log": "LOG-00C3B785",
+      "timestamp": "2026-11-13T05:57:49.425Z",
+      "id_user": "USR-ADMIN",
+      "username": "admin",
+      "role": "ADMIN",
+      "aksi": "LOGIN_BERHASIL",
+      "modul": "AUTH",
+      "detail": "Masuk sebagai ADMIN",
+      "ip_atau_device": "Web App"
+    },
     {
       "id_log": "LOG-BDB17229",
       "timestamp": "2026-11-13T02:25:52.232Z",

@@ -41,23 +41,23 @@ interface MasterDataProps {
 }
 
 const IMAGE_PRESETS = [
-  { label: 'Beras Organik', url: '/src/assets/images/prod_beras_organik_1794528005705.jpg' },
-  { label: 'Kopi Arabika', url: '/src/assets/images/prod_kopi_arabika_1794528004723.jpg' },
-  { label: 'Madu Hutan', url: '/src/assets/images/prod_madu_hutan_1794528004581.jpg' },
-  { label: 'Minyak Kelapa VCO', url: '/src/assets/images/prod_minyak_kelapa_1794528007328.jpg' },
-  { label: 'Batik Koperasi', url: '/src/assets/images/prod_batik_koperasi_1794528007074.jpg' },
-  { label: 'Gula Aren', url: '/src/assets/images/prod_gula_aren_1794528006522.jpg' },
-  { label: 'Set Piring Keramik (Pecah Belah)', url: '/src/assets/images/prod_set_piring_keramik_1794532836936.jpg' },
-  { label: 'Set Gelas Kaca (Pecah Belah)', url: '/src/assets/images/prod_set_gelas_kaca_1794532836365.jpg' },
-  { label: 'Digital Rice Cooker (Elektronik)', url: '/src/assets/images/prod_rice_cooker_1794532837700.jpg' },
-  { label: 'Blender Kaca (Elektronik)', url: '/src/assets/images/prod_blender_kaca_1794532836548.jpg' },
+  { label: 'Beras Organik', url: '/images/prod_beras_organik_1794528005705.jpg' },
+  { label: 'Kopi Arabika', url: '/images/prod_kopi_arabika_1794528004723.jpg' },
+  { label: 'Madu Hutan', url: '/images/prod_madu_hutan_1794528004581.jpg' },
+  { label: 'Minyak Kelapa VCO', url: '/images/prod_minyak_kelapa_1794528007328.jpg' },
+  { label: 'Batik Koperasi', url: '/images/prod_batik_koperasi_1794528007074.jpg' },
+  { label: 'Gula Aren', url: '/images/prod_gula_aren_1794528006522.jpg' },
+  { label: 'Set Piring Keramik (Pecah Belah)', url: '/images/prod_set_piring_keramik_1794532836936.jpg' },
+  { label: 'Set Gelas Kaca (Pecah Belah)', url: '/images/prod_set_gelas_kaca_1794532836365.jpg' },
+  { label: 'Digital Rice Cooker (Elektronik)', url: '/images/prod_rice_cooker_1794532837700.jpg' },
+  { label: 'Blender Kaca (Elektronik)', url: '/images/prod_blender_kaca_1794532836548.jpg' },
 ];
 
 const HERO_PRESETS = [
-  { label: 'Banner Utama Gerai Koperasi', url: '/src/assets/images/hero_koperasi_banner_1794528004578.jpg' },
-  { label: 'Etalase Pecah Belah Keramik', url: '/src/assets/images/prod_set_piring_keramik_1794532836936.jpg' },
-  { label: 'Etalase Elektronik Dapur', url: '/src/assets/images/prod_rice_cooker_1794532837700.jpg' },
-  { label: 'Etalase Kopi & Sembako', url: '/src/assets/images/prod_kopi_arabika_1794528004723.jpg' },
+  { label: 'Banner Utama Gerai Koperasi', url: '/images/hero_koperasi_banner_1794528004578.jpg' },
+  { label: 'Etalase Pecah Belah Keramik', url: '/images/prod_set_piring_keramik_1794532836936.jpg' },
+  { label: 'Etalase Elektronik Dapur', url: '/images/prod_rice_cooker_1794532837700.jpg' },
+  { label: 'Etalase Kopi & Sembako', url: '/images/prod_kopi_arabika_1794528004723.jpg' },
 ];
 
 async function readFileAsDataUrl(file: File): Promise<string> {
