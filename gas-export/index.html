@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <base target="_top">
+    <meta charset="UTF-8">
+    <title>KOPERASI DIGITAL PRO — KREATIF BY WITNO</title>
+    <?!= include('CSS'); ?>
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <div class="brand">
+          KOPERASI DIGITAL PRO
+          <small>KREATIF BY WITNO</small>
+        </div>
+        <button class="nav-btn active" onclick="switchView('beranda', this)">Beranda & Katalog</button>
+        <button class="nav-btn" onclick="switchView('pesanan', this)">Pesanan Saya</button>
+        <button class="nav-btn" onclick="switchView('simpanan', this)">Simpanan Anggota</button>
+        <button class="nav-btn" onclick="switchView('pinjaman', this)">Pinjaman & Angsuran</button>
+        <button class="nav-btn role-staff hidden" onclick="switchView('kasir', this)">Kasir POS</button>
+        <button class="nav-btn role-admin hidden" onclick="switchView('admin', this)">Dashboard & Keuangan</button>
+      </aside>
+
+      <div class="main-area">
+        <header class="topbar">
+          <input id="searchBox" class="search-input" placeholder="Cari produk koperasi..." oninput="renderCatalog()" />
+          <div style="display:flex; gap:8px; align-items:center;">
+            <button class="btn btn-outline" onclick="openCartModal()">Keranjang (<span id="cartCount">0</span>)</button>
+            <button id="btnAuth" class="btn btn-primary" onclick="openLoginModal()">Masuk</button>
+          </div>
+        </header>
+
+        <main class="content">
+          <section id="view-beranda">
+            <div class="hero">
+              <p style="font-size:11px; letter-spacing:0.08em; color:#FDE68A; font-weight:700;">KREATIF BY WITNO</p>
+              <h1>Belanja Hemat dengan Harga Khusus Anggota</h1>
+              <p style="font-size:13px; opacity:0.9;">Terhubung langsung ke Google Sheets & Google Drive Koperasi Digital Pro.</p>
+            </div>
+            <div id="catalogGrid" class="grid"></div>
+          </section>
+
+          <section id="view-pesanan" class="hidden">
+            <h2>Riwayat Pesanan</h2>
+            <div id="ordersList" style="margin-top:12px;"></div>
+          </section>
+
+          <section id="view-simpanan" class="hidden">
+            <h2>Simpanan Anggota</h2>
+            <div id="simpananContent" style="margin-top:12px;"></div>
+          </section>
+
+          <section id="view-pinjaman" class="hidden">
+            <h2>Pinjaman & Angsuran</h2>
+            <div id="pinjamanContent" style="margin-top:12px;"></div>
+          </section>
+
+          <section id="view-kasir" class="hidden">
+            <h2>Terminal Kasir POS</h2>
+            <p style="font-size:13px; color:#64748B;">Pilih produk dari katalog dan proses pembayaran langsung di gerai.</p>
+          </section>
+
+          <section id="view-admin" class="hidden">
+            <h2>Dashboard Admin & Laporan Laba Rugi</h2>
+            <div id="adminStatsGrid" class="grid" style="margin-top:12px;"></div>
+          </section>
+        </main>
+      </div>
+    </div>
+
+    <nav class="bottom-nav">
+      <button class="btn btn-outline" onclick="switchView('beranda')">Beranda</button>
+      <button class="btn btn-outline" onclick="switchView('pesanan')">Pesanan</button>
+      <button class="btn btn-outline" onclick="switchView('simpanan')">Simpanan</button>
+      <button class="btn btn-outline" onclick="openCartModal()">Keranjang</button>
+    </nav>
+
+    <div id="loginModal" class="modal-backdrop hidden">
+      <div class="modal-box">
+        <h3>Masuk KOPERASI DIGITAL PRO</h3>
+        <label style="font-size:12px;">Username</label>
+        <input id="loginUser" class="input" placeholder="admin / kasir / anggota1" />
+        <label style="font-size:12px;">Password</label>
+        <input id="loginPass" type="password" class="input" placeholder="Password" />
+        <div style="display:flex; gap:8px; justify-content:flex-end;">
+          <button class="btn btn-outline" onclick="closeLoginModal()">Batal</button>
+          <button class="btn btn-primary" onclick="submitLogin()">Masuk</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="cartModal" class="modal-backdrop hidden">
+      <div class="modal-box">
+        <h3>Keranjang & Checkout</h3>
+        <div id="cartItemsBox" style="margin:12px 0; font-size:13px;"></div>
+        <label style="font-size:12px;">Metode Pembayaran</label>
+        <select id="payMethod" class="input">
+          <option value="QRIS">QRIS</option>
+          <option value="TRANSFER_BANK">Transfer Bank</option>
+          <option value="TUNAI">Tunai</option>
+          <option value="SALDO_KOPERASI">Saldo Koperasi</option>
+        </select>
+        <div style="display:flex; gap:8px; justify-content:flex-end;">
+          <button class="btn btn-outline" onclick="closeCartModal()">Tutup</button>
+          <button class="btn btn-primary" onclick="submitCheckout()">Checkout Sekarang</button>
+        </div>
+      </div>
+    </div>
+
+    <?!= include('JavaScript'); ?>
+  </body>
+</html>

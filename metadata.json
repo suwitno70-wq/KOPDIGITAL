@@ -1,0 +1,6 @@
+{
+  "name": "KOPERASI DIGITAL PRO",
+  "description": "Platform koperasi digital modern dengan marketplace, simpanan, pinjaman, kasir POS, dan laporan keuangan — KREATIF BY WITNO.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
